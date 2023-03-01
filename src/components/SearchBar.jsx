@@ -7,7 +7,7 @@ const Search = ( ) => {
             <input 
                 className="inputBorder" 
                 type="text" 
-                placeholder ="Введите текст" />
+                placeholder ="Введите текст!" />
     </div>
 
     
