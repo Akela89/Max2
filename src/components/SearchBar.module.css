@@ -1,0 +1,17 @@
+.searchBarWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url(../assets/bg.jpg);   
+    max-width: 1200px;
+    padding: 25px;
+}
+
+.inputBorder{
+    width: 100%;
+    border: 5px solid purple;
+    border-radius: 30px;
+    padding: 10px;
+    outline: none;
+    font-size: 40px;
+    color: teal;
+}

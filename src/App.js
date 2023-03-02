@@ -1,16 +1,14 @@
 
 import './App.css';
 import SearchBar from './components/SearchBar';
-import Cards from './components/Cards';
-
+import Card from './components/Card';
 
 function App() {
   return (
     <div className="App">
       <SearchBar/>
-      <Cards/>
+      <Card/>
     </div>
   );
 }
-
 export default App;
