@@ -1,16 +1,15 @@
 import React from "react";
-import './styles.css'
+import classes from './SearchBar.module.css'
+
 
 const Search = ( ) => {
     return (
-        <div className="searchBarWrapper">
+        <div className={classes.searchBarWrapper}>
             <input 
-                className="inputBorder" 
+                className={classes.inputBorder} 
                 type="text" 
                 placeholder ="Введите текст!" />
-    </div>
-
-    
+        </div>
     )
 }
 export default Search;
