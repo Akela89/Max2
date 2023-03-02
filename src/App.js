@@ -1,7 +1,7 @@
 
 import './App.css';
 import SearchBar from './components/SearchBar';
-import Cards from './components/Cards';
+import Card from './components/Cards';
 
 
 function App() {
