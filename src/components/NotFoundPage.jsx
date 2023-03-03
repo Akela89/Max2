@@ -5,7 +5,7 @@ function NotFoundPage() {
       <div>
         <h2>Nothing to see here!</h2>
         <p>
-          <Link to="/">Go to the home page</Link>
+          <a href="/">Go to the home page</a>
         </p>
       </div>
     );

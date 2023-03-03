@@ -11,16 +11,16 @@ const Header = ( ) => {
             <nav className={classes.navContainer}>
                 <ul className={classes.navList}>
                     <li className={classes.navItem}>
-                        <a className={classes.textNavItem} href="/">Home</a>
+                        <Link className={classes.textNavItem} to="/">Home</Link>
                     </li>
                     <li className={classes.navItem}>
-                        <a className={classes.textNavItem} href="/AboutUs">About us</a>
+                        <Link className={classes.textNavItem} to="/AboutUs">About us</Link>
                     </li>
                     <li className={classes.navItem}>
-                        <a className={classes.textNavItem} href="/Info">Info</a>
+                        <Link className={classes.textNavItem} to="/Info">Info</Link>
                     </li>
                     <li className={classes.navItem}>
-                        <a className={classes.textNavItem} href="/Contacts">Contacts</a>
+                        <Link className={classes.textNavItem} to="/Contacts">Contacts</Link>
                     </li>
                 </ul>
             </nav>
