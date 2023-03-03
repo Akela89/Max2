@@ -1,0 +1,16 @@
+.ContactsWrapper{ 
+    background-color: rgb(41, 40, 40);  
+    max-width: 1200px;
+}
+
+.ContactsTitle{
+    color: azure;
+}
+
+.ContactsText{
+    font-size: 14px;
+    color: azure;
+    font-weight: 200;
+    line-height: 50px;
+    text-decoration: none;
+}
