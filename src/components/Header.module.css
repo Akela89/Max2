@@ -1,0 +1,42 @@
+.headerWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 70px;
+    background-color: rgb(41, 40, 40);  
+    max-width: 1200px;
+}
+
+.headerTitle{
+    font-size: 40px;
+    color: azure;
+    font-weight: 600;
+    align-items: center;
+}
+
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 452px;    
+}
+
+.navList{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    list-style-type: none;
+}
+
+.textNavItem{
+    font-size: 20px;
+    color: azure;
+    font-weight: 200;
+    line-height: 50px;
+    text-decoration: none;
+}
+
+.textNavItem:hover{
+    color: rgb(109, 65, 109);
+    transition: 0.5s;
+}
+
