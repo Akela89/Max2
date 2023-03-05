@@ -6,24 +6,24 @@ import Contacts from './components/Contacts';
 import {Routes, Route, Link} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import NotFoundPage from './components/NotFoundPage';
+import Forms from './components/Forms';
 
 
 function App() {
   return (
     <div className="App">
-   <Header/>
+      <Header/>
+      <Forms/>
 
-    <Routes>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/AboutUs' element={<AboutUs/>}/>
-        <Route path='/Info' element={<Info/>}/>
-        <Route path='/Contacts' element={<Contacts/>}/>
-        <Route path='*' element={<NotFoundPage/>}/>
+      <Routes>
+          <Route path='/' element={<HomePage/>}/>
+          <Route path='/AboutUs' element={<AboutUs/>}/>
+          <Route path='/Info' element={<Info/>}/>
+          <Route path='/Contacts' element={<Contacts/>}/>
+          <Route path='*' element={<NotFoundPage/>}/>
       </Routes> 
     </div>
- 
   );
-
 }
 
 
