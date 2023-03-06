@@ -3,6 +3,7 @@
     justify-content: center;
     background-color: rgb(41, 40, 40);  
     max-width: 1200px;
+    padding: 15px;
 }
 
 .formsBorder{
@@ -23,7 +24,6 @@
 .formStarsWrapper{
     display: flex;
     justify-content: center;
-    border: 1px solid azure;
     margin: 5px;
 }
 
@@ -86,7 +86,6 @@
   .uploadWrapper{
     display: flex;
     justify-content: center;
-    border: 1px solid azure;
     margin: 5px;
     padding: 10px;
     color: #ffffff;

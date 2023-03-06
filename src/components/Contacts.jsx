@@ -7,7 +7,7 @@ const Contacts = ( ) => {
         <div className={classes.ContactsWrapper}>
             <h1 className={classes.ContactsTitle}>Contacts</h1>
             <p className={classes.ContactsText}>
-            Please fill out the form.
+            +375 44 750 71 51
             </p>
             
         </div>

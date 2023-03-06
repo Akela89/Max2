@@ -20,16 +20,13 @@ const Forms = ( ) => {
                 </form>
 
                 <form>
-                    <p className={classes.formText}>Planet:</p> 
+                    <p className={classes.formText}>Сhoose the right one:</p> 
                     <select name="cars" id="cars">
-                        <option value="mercury">Mercury</option>
-                        <option value="venus">Venus</option>
-                        <option value="earth">Earth</option>
-                        <option value="mars">Mars</option>
-                        <option value="jupiter">Jupiter</option>
-                        <option value="saturn">Saturn</option>
-                        <option value="uranus">Uranus</option>
-                        <option value="neptune">Neptune</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JS</option>
+                        <option value="reactJs">React JS</option>
+                        
                     </select>
                 </form>
 
@@ -70,12 +67,12 @@ const Forms = ( ) => {
                     </div>
                 </form> 
 
-
                 <form>
                     <div className={classes.uploadWrapper}>
                     <input type="file" name="upload" id="upload"/>
                     </div>
                 </form> 
+                <input type="submit" />
             </div>
         </div>
     )
