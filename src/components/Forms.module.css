@@ -23,6 +23,7 @@
 
 .formStarsWrapper{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: 5px;
 }
@@ -90,4 +91,8 @@
     padding: 10px;
     color: #ffffff;
   }
-  
+
+
+ .errorBlock{
+  color: red;
+ }
