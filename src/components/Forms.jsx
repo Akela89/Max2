@@ -9,6 +9,24 @@ const Forms = ( ) => {
     const[emailError, setEmailError] = useState('Поле ввода не может быть пустым')
     const[passwordError, setPasswordError] = useState('Поле ввода не может быть пустым')
 
+    // настройка инпута "телефон"
+    const[phone, setPhone] = useState('')
+    const[phoneDirty, setPhoneDirty] = useState(false)
+    const[phoneError, setPhoneError] = useState('Поле ввода не может быть пустым')
+
+    const phoneHeadler = (e) =>{
+        setPhone(e.target.value.replace(/\D+/g, ''))
+        if (e.target.value.length < 12 || e.target.value.length < 10){
+        setPhoneError("Номер должен быть длиннее 12 символов и не меньше 10")
+            if (!e.target.value){
+                setPhoneError("Поле ввода не может быть пустым")
+            }
+        }   else {
+                setPhoneError("")
+            }
+    }
+
+    // настройка инпутов емейл и пароль
     const emailHandler = (e)=>{
         setEmail(e.target.value)
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,13 +49,15 @@ const Forms = ( ) => {
             }
     }
 
-
+ // общая настройка инпутов на заполеность
     const blurHundler = (e) => {
         switch(e.target.name){
             case 'email': setEmailDirty(true)
                 break
             case 'password': setPasswordlDirty(true)
                 break
+            case 'phone': setPhoneDirty(true) 
+                break   
             }
     }
 
@@ -55,7 +75,6 @@ const Forms = ( ) => {
                     name="email"
                     placeholder="Enter your email"
                     />
-                    
                     <br /><br />
 
                     <p className={classes.formText}>Password</p> 
@@ -67,24 +86,32 @@ const Forms = ( ) => {
                     type="password"
                     name="password"
                     placeholder="Enter your password"/>
-
                     <br /> <br />
 
-
                     <p className={classes.formText}>Phone:</p> 
+                    {(phoneDirty && phoneError) && <div className={classes.errorBlock}>{phoneError}</div>}
                     <input 
+                    onChange={e=>phoneHeadler(e)}
+                    value={phone}
+                    onBlur={e => blurHundler(e)}
                     type="tel" 
                     name="phone"
-                    placeholder="Phone Number"/>
+                    placeholder="Enter your phone number"
+                    />
                     <br /><br />
 
 
                     <p className={classes.formText}>Birthday:</p> 
-                    <input type="date" name="birthday" />
+                    <input 
+                    type="date" 
+                    name="birthday"
+                    min="1901-01-01"
+                    />
 
 
                     <p className={classes.formText}>Сhoose the right one:</p> 
                     <select name="cars" id="cars">
+                        <option></option>
                         <option value="html">HTML</option>
                         <option value="css">CSS</option>
                         <option value="js">JS</option>
