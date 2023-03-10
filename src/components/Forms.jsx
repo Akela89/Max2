@@ -9,6 +9,23 @@ const Forms = ( ) => {
     const[emailError, setEmailError] = useState('Поле ввода не может быть пустым')
     const[passwordError, setPasswordError] = useState('Поле ввода не может быть пустым')
 
+    // настройка инпута "дата рождения"
+    const[birthday, setBirthday] = useState('')
+    const[birthdayDirty, setBirthdayDirty] = useState(false)
+    const[birthdayError, setBirthdayError] = useState('Поле ввода не может быть пустым')
+    const birthdayHeadler = (e) =>{
+        
+        setBirthday(e.target.value)
+            if (!e.target.value){
+                setBirthdayError("Поле ввода не может быть пустым")
+            }
+           else {
+                setBirthdayError("")
+            }
+    }
+
+
+
     // настройка инпута "телефон"
     const[phone, setPhone] = useState('')
     const[phoneDirty, setPhoneDirty] = useState(false)
@@ -16,8 +33,8 @@ const Forms = ( ) => {
 
     const phoneHeadler = (e) =>{
         setPhone(e.target.value.replace(/\D+/g, ''))
-        if (e.target.value.length < 12 || e.target.value.length < 10){
-        setPhoneError("Номер должен быть длиннее 12 символов и не меньше 10")
+        if (e.target.value.length < 10 || e.target.value.length > 11){
+        setPhoneError("Номер должен быть длиннее 10 символов и не меньше 11")
             if (!e.target.value){
                 setPhoneError("Поле ввода не может быть пустым")
             }
@@ -39,8 +56,8 @@ const Forms = ( ) => {
 
     const passwordHeadler = (e) =>{
         setPassword(e.target.value)
-        if (e.target.value.length < 3 || e.target.value.length < 8){
-        setPasswordError("Пароль должен быть длиннее 3 символов и не меньше 8")
+        if (e.target.value.length < 6 || e.target.value.length > 8){
+        setPasswordError("Пароль должен быть длиннее 6 символов и не меньше 8")
             if (!e.target.value){
                 setPasswordError("Поле ввода не может быть пустым")
             }
@@ -49,7 +66,7 @@ const Forms = ( ) => {
             }
     }
 
- // общая настройка инпутов на заполеность
+ // общая настройка инпутов 
     const blurHundler = (e) => {
         switch(e.target.name){
             case 'email': setEmailDirty(true)
@@ -57,7 +74,9 @@ const Forms = ( ) => {
             case 'password': setPasswordlDirty(true)
                 break
             case 'phone': setPhoneDirty(true) 
-                break   
+                break 
+            case 'birthday': setBirthdayDirty(true)
+                break
             }
     }
 
@@ -75,7 +94,6 @@ const Forms = ( ) => {
                     name="email"
                     placeholder="Enter your email"
                     />
-                    <br /><br />
 
                     <p className={classes.formText}>Password</p> 
                     {(passwordDirty && passwordError) && <div className={classes.errorBlock}>{passwordError}</div>}
@@ -96,14 +114,17 @@ const Forms = ( ) => {
                     onBlur={e => blurHundler(e)}
                     type="tel" 
                     name="phone"
-                    placeholder="Enter your phone number"
+                    placeholder="Format - 8044..."
                     />
                     <br /><br />
 
-
                     <p className={classes.formText}>Birthday:</p> 
+                    {(birthdayDirty && birthdayError) && <div className={classes.errorBlock}>{birthdayError}</div>}
                     <input 
+                    onChange={e => birthdayHeadler(e)}
+                    onBlur={e => blurHundler(e)}
                     type="date" 
+                    value={birthday}
                     name="birthday"
                     min="1901-01-01"
                     />
