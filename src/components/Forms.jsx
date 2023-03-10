@@ -9,6 +9,23 @@ const Forms = ( ) => {
     const[emailError, setEmailError] = useState('Поле ввода не может быть пустым')
     const[passwordError, setPasswordError] = useState('Поле ввода не может быть пустым')
 
+
+ // настройка инпута "язык"
+    const[language, setLanguage] = useState('')
+    const[languageDirty, setLanguageDirty] = useState(false)
+    const[languageError, setLanguageError] = useState('Поле ввода не может быть пустым')
+    const languageHeadler = (e) =>{
+        
+        setLanguage(e.target.value)
+            if (!e.target.value){
+                setLanguageError("Поле ввода не может быть пустым")
+            }
+           else {
+                setLanguageError("")
+            }
+    }
+
+
     // настройка инпута "дата рождения"
     const[birthday, setBirthday] = useState('')
     const[birthdayDirty, setBirthdayDirty] = useState(false)
@@ -23,8 +40,6 @@ const Forms = ( ) => {
                 setBirthdayError("")
             }
     }
-
-
 
     // настройка инпута "телефон"
     const[phone, setPhone] = useState('')
@@ -76,6 +91,8 @@ const Forms = ( ) => {
             case 'phone': setPhoneDirty(true) 
                 break 
             case 'birthday': setBirthdayDirty(true)
+                break
+            case 'language': setLanguageDirty(true)
                 break
             }
     }
@@ -130,13 +147,18 @@ const Forms = ( ) => {
                     />
 
 
-                    <p className={classes.formText}>Сhoose the right one:</p> 
-                    <select name="cars" id="cars">
-                        <option></option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="js">JS</option>
-                        <option value="reactJs">React JS</option>   
+                    <p className={classes.formText}>Сhoose the right one:</p>
+                    {(languageDirty && languageError) && <div className={classes.errorBlock}>{languageError}</div>}
+                    <select name="language"
+                            value={language} 
+                            onChange={e => languageHeadler(e)}
+                            onBlur={e => blurHundler(e)}
+                    >
+                                <option></option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="js">JS</option>
+                                <option value="reactJs">React JS</option>   
                     </select>
 
 
@@ -174,7 +196,11 @@ const Forms = ( ) => {
 
 
                     <div className={classes.uploadWrapper}>
-                    <input type="file" name="upload" id="upload"/>
+                    <input
+                    type="file"
+                    accept=".jpg, .png, .gif"
+                    name="upload"
+                    id="upload"/>
                     </div>
  
                 <input type="submit" />
