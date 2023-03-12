@@ -7,9 +7,12 @@
 }
 
 .formsBorder{
+    display: flex;
+    flex-direction: column;
     width: 600px;
     padding: 10px;
     justify-content: center;
+    align-items: center;
     border: 4px solid azure;
 }
 
@@ -78,10 +81,12 @@
   }
 
   .uploadWrapper{
+    border: 2px solid #ffffff;
     display: flex;
     justify-content: center;
     margin: 5px;
     padding: 10px;
+
     color: #ffffff;
   }
 
@@ -89,3 +94,5 @@
  .errorBlock{
   color: red;
  }
+
+ 
