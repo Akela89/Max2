@@ -18,15 +18,8 @@
     color: azure;
     font-weight: 200;
     line-height: 50px;
-   
 }
 
-.formStarsWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 5px;
-}
 
 
 

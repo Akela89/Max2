@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import classes from './Forms.module.css';
 
 const Forms = ( ) => {
+
+    // настройка инпутов емейл и пароль
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
     const[emailDirty, setEmailDirty] = useState(false)
@@ -9,8 +11,28 @@ const Forms = ( ) => {
     const[emailError, setEmailError] = useState('Поле ввода не может быть пустым')
     const[passwordError, setPasswordError] = useState('Поле ввода не может быть пустым')
 
+    const emailHandler = (e)=>{
+        setEmail(e.target.value)
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(String(e.target.value).toLowerCase())){
+                setEmailError("Некорректный емейл")
+            } else {
+                setEmailError("")
+            }
+    }
+    const passwordHeadler = (e) =>{
+        setPassword(e.target.value)
+        if (e.target.value.length < 6 || e.target.value.length > 8){
+        setPasswordError("Пароль должен быть длиннее 6 символов и не меньше 8")
+            if (!e.target.value){
+                setPasswordError("Поле ввода не может быть пустым")
+            }
+        }   else {
+                setPasswordError("")
+            }
+    }
 
- // настройка инпута "язык"
+    // настройка инпута "язык"
     const[language, setLanguage] = useState('')
     const[languageDirty, setLanguageDirty] = useState(false)
     const[languageError, setLanguageError] = useState('Поле ввода не может быть пустым')
@@ -24,7 +46,6 @@ const Forms = ( ) => {
                 setLanguageError("")
             }
     }
-
 
     // настройка инпута "дата рождения"
     const[birthday, setBirthday] = useState('')
@@ -58,28 +79,7 @@ const Forms = ( ) => {
             }
     }
 
-    // настройка инпутов емейл и пароль
-    const emailHandler = (e)=>{
-        setEmail(e.target.value)
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!re.test(String(e.target.value).toLowerCase())){
-                setEmailError("Некорректный емейл")
-            } else {
-                setEmailError("")
-            }
-    }
-
-    const passwordHeadler = (e) =>{
-        setPassword(e.target.value)
-        if (e.target.value.length < 6 || e.target.value.length > 8){
-        setPasswordError("Пароль должен быть длиннее 6 символов и не меньше 8")
-            if (!e.target.value){
-                setPasswordError("Поле ввода не может быть пустым")
-            }
-        }   else {
-                setPasswordError("")
-            }
-    }
+   
 
  // общая настройка инпутов 
     const blurHundler = (e) => {
@@ -97,6 +97,7 @@ const Forms = ( ) => {
             }
     }
 
+   
     return (
         <form>
         <div className={classes.formsWrapper}>
@@ -149,11 +150,10 @@ const Forms = ( ) => {
 
                     <p className={classes.formText}>Сhoose the right one:</p>
                     {(languageDirty && languageError) && <div className={classes.errorBlock}>{languageError}</div>}
-                    <select name="language"
-                            value={language} 
-                            onChange={e => languageHeadler(e)}
-                            onBlur={e => blurHundler(e)}
-                    >
+                    <select name="language" 
+                    value={language} 
+                    onChange={e => languageHeadler(e)}
+                    onBlur={e => blurHundler(e)}>
                                 <option></option>
                                 <option value="html">HTML</option>
                                 <option value="css">CSS</option>
@@ -161,30 +161,26 @@ const Forms = ( ) => {
                                 <option value="reactJs">React JS</option>   
                     </select>
 
+              
 
-                <div className={classes.formStarsWrapper}>
-                        <p className={classes.formText}>
-                            choose the one you want
-                        </p> 
-                        <label>
-                            <input type="checkbox" name="stars"  value="aldebaran"/>
-                            <label  className={classes.formText}> - Aldebaran</label>
-                            <br />
-                            <input type="checkbox" name="stars"  value="sirius"/>
-                            <label className={classes.formText}> - Sirius</label>
-                            <br />
-                            <input type="checkbox" name="stars"  value="vega"/>
-                            <label  className={classes.formText}> - Vega</label>
-                            <br />
-                            <input type="checkbox" name="stars"  value="antares"/>
-                            <label  className={classes.formText}> - Antares</label>
-                            <br />
-                        </label>
-                </div>
+                    <p className={classes.formText}>choose the one you want</p>
+                        <input type="checkbox" name="months" value="3months"/>
+                        <p className={classes.formText}> 3 months</p>
+                        <br />
+                        <input type="checkbox" name="months" value="6months"/>
+                        <p className={classes.formText}> 6 months</p>
+                        <br />
+                        <input type="checkbox" name="months" value="9months"/>
+                        <p className={classes.formText}> 9 months</p>
+                        <br />
+
 
                     <p className={classes.formText}>
                     <label>
-                        <input type="checkbox" name="stars"  value="antares"/>
+                        <input 
+                        type="checkbox" 
+                        name="news"  
+                        value="news"/>
                     </label>  - Want to receive news? 
                     </p>  
 
@@ -204,7 +200,6 @@ const Forms = ( ) => {
                     </div>
  
                 <input type="submit" />
-                
             </div>
         </div>
         </form>
@@ -212,11 +207,3 @@ const Forms = ( ) => {
 }
 
 export default Forms;
-
-// **Пример:** 
-// input - Имя, Фамилия, Zip код;
-// date input - день рождения, дата доставки;
-// dropdown/select - список стран, список штатов (выбрать можно только один элемент из списка)
-// checkbox - поле "согласен на обработку данных", список дополнительных подарков к заказу (выбрать можно несколько из списка)
-// switcher - male/female, хочу получать уведомления об акциях/ не хочу
-// file upload - profile picture
