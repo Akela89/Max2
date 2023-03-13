@@ -1,22 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from './Forms.module.css';
 
-function Forms() {
-    const [formData, setFormData] = useState(
-        {
-            firstName: "", 
-            lastName: "", 
-            email: "", 
-            password: "",
-            isFriendly: true,
-            employment: "",
-            favColor: "",
-            isMan: "",
-        }        
-        
-    )
+function Forms() { 
     
-    function handleChange(event) {
+    const initialValues ={
+        firstName: "", 
+        lastName: "", 
+        email: "", 
+        password: "",
+        isFriendly: true,
+        employment: "",
+        favColor: "",
+        isMan: "Woman",
+    }
+    const [formData, setFormData] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+
+     function handleSubmit(event) {
+        event.preventDefault()
+        setFormErrors (validate(formData));
+        setIsSubmit(true)
+    }
+
+    useEffect(()=>{
+        console.log(formErrors)
+        if(Object.keys(formErrors).length === 0 && isSubmit){
+            console.log(formData);
+        }
+    },[formErrors])
+
+    const validate = (values) => {
+        const errors = {}
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.firstName) {
+            errors.firstName = "FirstName is required!";
+        }
+
+        if (!values.lastName) {
+            errors.lastName = "LastName is required!";
+        }
+        if (!values.email) {
+            errors.email = "Email is required!";
+        } else if(!regex.test(values.email)){
+            errors.email = "This is not a valid email!";
+        }
+        if (!values.password) {
+            errors.password = "Password is required!";
+        }  else if(values.password.length < 4){
+            errors.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+            errors.password = "Password cannot exceed more than 10 characters";
+        }
+        if (!values.isFriendly) {
+            errors.isFriendly = "is required!";
+        }
+        if (!values.employment) {
+            errors.employment = "is required!";
+        }
+        if (!values.favColor) {
+            errors.favColor = "is required!";
+        }
+        if (!values.isMan) {
+            values.isMan = "Woman";
+        } 
+        return errors
+};
+  
+        {Object.keys(formErrors).length === 0 && isSubmit ? (
+        <div className={classes.message}>Signed in successfully</div>
+        ) : alert="dddd"}
+
+        function handleChange(event) {
         const {name, value, type, checked} = event.target
         setFormData(prevFormData => {
             return {
@@ -26,13 +81,9 @@ function Forms() {
         })
     }
     
-    function handleSubmit(event) {
-        event.preventDefault()
-        // submitToApi(formData) разобраться!
-        console.log(formData)
-    }
-    
+   
     return (
+
         <form onSubmit={handleSubmit}>
             <div className={classes.formsWrapper}>
             <div className={classes.formsBorder}>
@@ -44,6 +95,9 @@ function Forms() {
                 name="firstName"
                 value={formData.firstName}
             />
+
+            <p className={classes.errorBlock}>{formErrors.firstName}</p>
+
             <label className={classes.formText}>Last name</label>
             <input
                 type="text"
@@ -52,6 +106,9 @@ function Forms() {
                 name="lastName"
                 value={formData.lastName}
             />
+
+            <p className={classes.errorBlock}>{formErrors.firstName}</p>
+
             <label className={classes.formText}>Email:</label> 
             <input
                 type="email"
@@ -60,6 +117,9 @@ function Forms() {
                 name="email"
                 value={formData.email}
             />
+
+            <p className={classes.errorBlock}>{formErrors.email}</p>
+
             <label className={classes.formText}>Password</label> 
             <input
                 type="password"
@@ -68,6 +128,9 @@ function Forms() {
                 name="password"
                 value={formData.password}
             />
+
+            <p className={classes.errorBlock}>{formErrors.password}</p>
+
             <label className={classes.formText} htmlFor="isFriendly">Are you friendly? <br />
             <input 
                 type="checkbox" 
@@ -79,6 +142,8 @@ function Forms() {
             </label>
             <br />
             <br />
+
+            <p className={classes.errorBlock}>{formErrors.isFriendly}</p>
             
             <fieldset>
             <p className={classes.formText}>Current employment status</p>
@@ -90,6 +155,7 @@ function Forms() {
                     checked={formData.employment === "unemployed"}
                     onChange={handleChange}
                 />
+                
                 <label className={classes.formText} htmlFor="unemployed">Unemployed</label>
                 <br />
                 
@@ -116,6 +182,8 @@ function Forms() {
                 <br />
             </fieldset>
             <br />
+
+            <p className={classes.errorBlock}>{formErrors.radio}</p>
             
             <label 
             className={classes.text} 
@@ -128,6 +196,7 @@ function Forms() {
                 onChange={handleChange}
                 name="favColor"
             >
+                <option></option>
                 <option value="red">Red</option>
                 <option value="orange">Orange</option>
                 <option value="yellow">Yellow</option>
@@ -138,6 +207,9 @@ function Forms() {
             </select>
             <br />
             <br />
+
+            <p className={classes.errorBlock}>{formErrors.favColor}</p>
+
             <div className={classes.container}>
                 <input 
                     type="checkbox" 
@@ -149,23 +221,15 @@ function Forms() {
                 />
                 <label for="toggleButton" className={classes.text}>male/female</label>
             </div>
+
             <br />
-            <div className={classes.uploadWrapper}>
-                <input
-                    type="file"
-                    accept=".jpg, .png, .gif"
-                    name="upload"
-                    id="upload"
-                />
-            </div>
-            <br />
-            <button>Submit</button>
+            <button type='submit'>Submit</button>
             </div>
             </div>
         </form>
     )
 
-}
+    }
 
 export default Forms;
 
