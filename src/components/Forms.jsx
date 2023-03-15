@@ -225,10 +225,21 @@ function Forms() {
             <button type='submit'>Submit</button>
             <br />
             {Object.keys(formErrors).length === 0 && isSubmit ? (
-            <div className={classes.message}>FUCK YEAAA!!!</div>
+            <div className={classes.message}>
+                {initialValues.firstName}
+            </div>
             ) : (
-                <pre></pre>
+                <pre className={classes.errorBlock}>Ошибка в заполении данных</pre>
             ) }
+
+            {/* Object.keys(ObjectTest).map(obj, i) => {
+            return (
+            <div>
+                id is: {ObjectTest[obj].id} ;
+                name is: {ObjectTest[obj].name}
+            </div> */}
+
+
             </div>
             </div>
         </form>
