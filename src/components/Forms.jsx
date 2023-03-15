@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import classes from './Forms.module.css';
 
+
 function Forms() { 
-    
     const initialValues ={
         firstName: "", 
         lastName: "", 
@@ -11,7 +11,7 @@ function Forms() {
         isFriendly: true,
         employment: "",
         favColor: "",
-        isMan: "Woman",
+        isMan: "",
     }
     const [formData, setFormData] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -62,14 +62,14 @@ function Forms() {
             errors.favColor = "is required!";
         }
         if (!values.isMan) {
-            values.isMan = "Woman";
+            values.isMan = "";
         } 
         return errors
+        
 };
-  
-        {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className={classes.message}>Signed in successfully</div>
-        ) : alert="dddd"}
+        
+      
+      
 
         function handleChange(event) {
         const {name, value, type, checked} = event.target
@@ -83,9 +83,8 @@ function Forms() {
     
    
     return (
-
-        <form onSubmit={handleSubmit}>
-            <div className={classes.formsWrapper}>
+        <form onSubmit={handleSubmit}>      
+            <div className={classes.formsWrapper}> 
             <div className={classes.formsBorder}>
             <label className={classes.formText}>First name</label>
             <input
@@ -224,6 +223,12 @@ function Forms() {
 
             <br />
             <button type='submit'>Submit</button>
+            <br />
+            {Object.keys(formErrors).length === 0 && isSubmit ? (
+            <div className={classes.message}>FUCK YEAAA!!!</div>
+            ) : (
+                <pre></pre>
+            ) }
             </div>
             </div>
         </form>
