@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,} from "react";
 import classes from './Forms.module.css';
 
 function Forms() { 
@@ -15,14 +15,49 @@ function Forms() {
     const [formData, setFormData] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-    const [resultForm, setResultForm] = useState({});
+    const [resultForm, setResultForm] = useState(formData);
 
     function handleSubmit(event) {
         event.preventDefault()
         setFormErrors (validate(formData));
         setIsSubmit(true)
-        setResultForm(formData)
+        setResultForm(!resultForm)
     }
+
+    let contentCard = null;
+
+    if (resultForm){
+        contentCard = (
+        <div className={classes.message}>
+            <p>{formData.firstName}</p>
+            <p>{formData.lastName}</p>
+            <p>{formData.email}</p>
+            <p>{formData.password}</p>
+            <p>{formData.isFriendly}</p>
+            <p>{formData.employment}</p>
+            <p>{formData.favColor}</p>
+            <p>{formData.isMan}</p>
+        </div> 
+        )
+    }
+
+    
+    // {Object.keys(resultForm).length === 0 && isSubmit ? null :
+            
+    //     <div className={classes.message}>
+    //      Имя:{formData.firstName} 
+    //      Фамилия:{formData.lastName}
+    //      Электронная почта:{formData.email}
+    //      Пароль:{formData.password}
+    //      Дружелюбность:{formData.isFriendly}
+    //      Работа:{formData.employment}
+    //      Любимый цвет:{formData.favColor}
+    //      Пол:{formData.isMan}
+    //      </div> 
+    //      }
+
+
+
 
     useEffect(()=>{
         console.log(formErrors)
@@ -30,6 +65,7 @@ function Forms() {
             console.log(formData);
         }
     },[formErrors])
+
 
     const validate = (values) => {
         const errors = {}
@@ -212,23 +248,12 @@ function Forms() {
             </div>
             <br />
 
-            <button type='submit' > Submit</button>
+            <button type='submit' onClick={handleSubmit}> Submit</button>
+            {contentCard}
             <br />
-            {Object.keys(resultForm).length === 0 ? setResultForm :           
-             <div className={classes.message}>
-             Имя:{resultForm.firstName} 
-             Фамилия:{resultForm.lastName}
-             Электронная почта:{formData.email}
-             Пароль:{resultForm.password}
-             Дружелюбность:{resultForm.isFriendly}
-             Работа:{resultForm.employment}
-             Любимый цвет:{resultForm.favColor}
-             Пол:{resultForm.isMan}
-             </div> 
-            }
+            
             </div>
             </div>
         </form>
-    )
-    }
+    )}
 export default Forms;
