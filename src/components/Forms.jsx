@@ -15,55 +15,26 @@ function Forms() {
     const [formData, setFormData] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-    const [resultForm, setResultForm] = useState(formData);
+    const [formsList, setFormsList] = useState([]);
 
     function handleSubmit(event) {
         event.preventDefault()
-        setFormErrors (validate(formData));
+        const validateResult = validate(formData)
+        let valid = Object.keys(validateResult).length === 0
+        setFormErrors (validateResult);
+
+        if (!valid) {
+            return
+        }
+        setFormsList([...formsList, formData ])
         setIsSubmit(true)
-        setResultForm(!resultForm)
     }
 
-    let contentCard = null;
-
-    if (resultForm){
-        contentCard = (
-        <div className={classes.message}>
-            <p>{formData.firstName}</p>
-            <p>{formData.lastName}</p>
-            <p>{formData.email}</p>
-            <p>{formData.password}</p>
-            <p>{formData.isFriendly}</p>
-            <p>{formData.employment}</p>
-            <p>{formData.favColor}</p>
-            <p>{formData.isMan}</p>
-        </div> 
-        )
-    }
-
- 
-    // {Object.keys(resultForm).length === 0 && isSubmit ? null :
-
-    //     <div className={classes.message}>
-    //      Имя:{formData.firstName} 
-    //      Фамилия:{formData.lastName}
-    //      Электронная почта:{formData.email}
-    //      Пароль:{formData.password}
-    //      Дружелюбность:{formData.isFriendly}
-    //      Работа:{formData.employment}
-    //      Любимый цвет:{formData.favColor}
-    //      Пол:{formData.isMan}
-    //      </div> 
-    //      }
-
-    
     useEffect(()=>{
-        console.log(formErrors)
         if(Object.keys(formErrors).length === 0 && isSubmit){
             console.log(formData);
         }
     },[formErrors])
-
 
     const validate = (values) => {
         const errors = {}
@@ -123,7 +94,6 @@ function Forms() {
                 name="firstName"
                 value={formData.firstName}
             />
-
             <p className={classes.errorBlock}>{formErrors.firstName}</p>
 
             <label className={classes.formText}>Last name</label>
@@ -134,7 +104,6 @@ function Forms() {
                 name="lastName"
                 value={formData.lastName}
             />
-
             <p className={classes.errorBlock}>{formErrors.firstName}</p>
 
             <label className={classes.formText}>Email:</label> 
@@ -145,7 +114,6 @@ function Forms() {
                 name="email"
                 value={formData.email}
             />
-
             <p className={classes.errorBlock}>{formErrors.email}</p>
 
             <label className={classes.formText}>Password</label> 
@@ -156,7 +124,6 @@ function Forms() {
                 name="password"
                 value={formData.password}
             />
-
             <p className={classes.errorBlock}>{formErrors.password}</p>
 
             <label className={classes.formText} htmlFor="isFriendly">Are you friendly? <br />
@@ -242,14 +209,27 @@ function Forms() {
                     onChange={handleChange}
                     name="isMan" 
                     className={classes.toggleButton}/>
-            <label for="toggleButton" className={classes.text}>male/female</label>
+                <label for="toggleButton" className={classes.text}>male/female</label>
             </div>
             <br />
 
             <button type='submit' onClick={handleSubmit}> Submit</button>
-            {contentCard}
-            <br />
-            
+            {formsList.map(item => {
+                return (
+                    <div className={classes.message}>
+                        <p>{item.firstName}</p>
+                        <p>{item.lastName}</p>
+                        <p>{item.email}</p>
+                        <p>{item.password}</p>
+                        <p>{item.isFriendly}</p>
+                        <p>{item.employment}</p>
+                        <p>{item.favColor}</p>
+                        <p>{item.isMan}</p>
+                    </div> 
+                    )        
+                })
+            }
+            <br /> 
             </div>
             </div>
         </form>

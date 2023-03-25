@@ -2,10 +2,18 @@ import React from "react";
 
 function EditableList() {
     const [list,setList] = React.useState([
-      'Крупа',
-      'Мясо',
-      'Молоко',
-      'Хлеб',
+      {
+        name:'Крупа',
+      },
+      {
+        name:'Крупа',
+      },
+      {
+        name:'Крупа',
+      },
+      {
+        name:'Крупа',
+      },  
     ])
     const [item,setItem] = React.useState()
     
@@ -34,7 +42,7 @@ function EditableList() {
         
         <ul className="list-group shadow">
           {list.map((element,index)=>(
-              <li key={index} className="list-group-item">{element}
+              <li key={index} className="list-group-item">{element.name}
               </li>
             ) 
           )}
