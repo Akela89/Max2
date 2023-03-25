@@ -41,9 +41,9 @@ function Forms() {
         )
     }
 
-    
+ 
     // {Object.keys(resultForm).length === 0 && isSubmit ? null :
-            
+
     //     <div className={classes.message}>
     //      Имя:{formData.firstName} 
     //      Фамилия:{formData.lastName}
@@ -56,9 +56,7 @@ function Forms() {
     //      </div> 
     //      }
 
-
-
-
+    
     useEffect(()=>{
         console.log(formErrors)
         if(Object.keys(formErrors).length === 0 && isSubmit){

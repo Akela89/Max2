@@ -25,6 +25,9 @@ const Header = ( ) => {
                     <li className={classes.navItem}>
                         <Link className={classes.textNavItem} to="/Forms">Forms</Link>
                     </li>
+                    <li className={classes.navItem}>
+                        <Link className={classes.textNavItem} to="/EditableList">EditableList</Link>
+                    </li>
                 </ul>
             </nav>
         </div>
