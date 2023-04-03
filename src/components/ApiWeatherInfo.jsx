@@ -10,8 +10,7 @@ const ApiWeatherInfo = (props) => {
                     <p>Местоположение:{props.city}</p>
                     <p>Температура:{props.temp}</p>
                     <p>Восход солнца:{props.sunrise}</p>
-                    <p>Заход солнца:{props.sunset}</p>
-                    
+                    <p>Заход солнца:{props.sunset}</p> 
                 </div>
             }
             <p>{props.error}</p>

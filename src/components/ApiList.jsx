@@ -21,7 +21,7 @@ state = {
         let city = e.target.elements.city.value;
         
         if(city === true){
-            const apiUrl = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+            const apiUrl = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
             const data = await apiUrl.json();
             
             this.setState({
