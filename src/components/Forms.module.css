@@ -7,9 +7,12 @@
 }
 
 .formsBorder{
+    display: flex;
+    flex-direction: column;
     width: 600px;
     padding: 10px;
     justify-content: center;
+    align-items: center;
     border: 4px solid azure;
 }
 
@@ -18,17 +21,7 @@
     color: azure;
     font-weight: 200;
     line-height: 50px;
-   
 }
-
-.formStarsWrapper{
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-}
-
-
-
 
 .container {
     display: flex;
@@ -54,7 +47,6 @@
     border-radius: 30px;
     outline: none;
     cursor: pointer;
-  
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -84,10 +76,23 @@
   }
 
   .uploadWrapper{
+    border: 2px solid #ffffff;
     display: flex;
     justify-content: center;
     margin: 5px;
     padding: 10px;
     color: #ffffff;
   }
-  
+
+ .errorBlock{
+  color: red;
+ }
+
+ .message{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(41, 40, 40);
+  color: azure;
+ }
+ 
