@@ -6,11 +6,11 @@ const ApiWeatherInfo = (props) => {
         <div className={classes.formsWrapper}>
             {props.city &&
                 <div>
-                    <p>Страна: {props.country}</p>
-                    <p>Местоположение:{props.city}</p>
-                    <p>Температура:{props.temp}</p>
-                    <p>Восход солнца:{props.sunrise}</p>
-                    <p>Заход солнца:{props.sunset}</p> 
+                    <p className={classes.formText}>Страна: {props.country}</p>
+                    <p className={classes.formText}>Местоположение:{props.city}</p>
+                    <p className={classes.formText}>Температура:{props.temp}</p>
+                    <p className={classes.formText}>Восход солнца:{props.sunrise}</p>
+                    <p className={classes.formText}>Заход солнца:{props.sunset}</p> 
                 </div>
             }
             <p>{props.error}</p>
