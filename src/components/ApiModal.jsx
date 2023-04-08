@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './modalWindow.module.css'
 import ApiWeatherInfo from "./ApiWeatherInfo";
+
 import nft from '../assets/nft.jpg'
 
 
