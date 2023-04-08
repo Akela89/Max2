@@ -5,9 +5,9 @@ import ApiForm from "./ApiForm";
 
 const apiKey = '986b337467ac73faba2c5e2464a7fa47';
 
-class ApiList extends React.Component {
+const ApiList = () => {
 
-state = {
+let state = {
     temp: undefined,
     city: undefined,
     country: undefined,
@@ -16,7 +16,7 @@ state = {
     error: undefined,
 }
 
-    gettingWeather = async (e) =>{
+    let gettingWeather = async (e) =>{
         e.preventDefault();
         let city = e.target.elements.city.value;
         
@@ -43,20 +43,19 @@ state = {
             })
         }
     }
-    render(){
     return (
         <div className={classes.formsWrapper}>
-            <ApiForm weatherMethod={this.gettingWeather}/>
+            <ApiForm weatherMethod={gettingWeather}/>
             <ApiWeatherInfo
-                temp={this.state.temp}
-                city={this.state.city}
-                country={this.state.country}
-                sunrise={this.state.sunrise}
-                sunset={this.state.sunset}
-                error={this.state.error}
+                temp={state.temp}
+                city={state.city}
+                country={state.country}
+                sunrise={state.sunrise}
+                sunset={state.sunset}
+                error={state.error}
             />
         </div>
-    )}
+    )
 }
 
 export default ApiList;

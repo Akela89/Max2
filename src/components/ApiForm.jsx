@@ -5,7 +5,7 @@ import ApiModal from "./ApiModal";
 
 
 const ApiForm = (props) => {
-const [modalActive, setModalActive] = useState(true)
+const [openModal, setOpenModal] = useState(false)
 
     return (
         <div>
@@ -13,11 +13,13 @@ const [modalActive, setModalActive] = useState(true)
             <div className={classes.formsWrapper}>
                 <h1 className={classes.formText}>Введите город на английском</h1>
                 <input type="text" name="city" placeholder="Город"/>
-                
-                <button onClick={()=>setModalActive(true)}>Получить погоду</button>
+
+                <button onClick={() => setOpenModal(true)}>Получить погоду</button>
+                <ApiModal open={openModal} onClose={()=>setOpenModal(false)}/>
             </div>
+            
         </form>
-        <ApiModal active={modalActive} setActive={setModalActive} />
+        
         </div>
     )
 }

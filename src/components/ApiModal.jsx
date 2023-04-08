@@ -1,18 +1,25 @@
 import React from "react";
 import classes from './modalWindow.module.css'
+import ApiWeatherInfo from "./ApiWeatherInfo";
+import nft from '../assets/nft.jpg'
 
 
-const ApiModal = (active, setActive) => {
+const ApiModal = ({open, onClose}) => {
+    if (!open) return null
     return (
-        <div 
-        className={active ? 'modalWindowActive' : 'modalWindow'} 
-        onclick={() => setActive(false)}
-        >
-            <div 
-            className={classes.modalContent} 
-            onclick ={e=>e.stopPropagation()}  >
+        <div onClick={onClose} className={classes.overlay}>
+            <div onClick={(e) =>{
+                e.stopPropagation()
+            }} className={classes.modalContainer}>
+                <img src={nft} alt="weatherPic" />
+                <div className={classes.modalRight}>
+                    <p onClick={onClose} className={classes.closeBtn}>X</p>
+                    <div className={classes.content}>
+                        <ApiWeatherInfo/>
+                    </div>
+                </div>
             </div>
-
+            
         </div>
     )
 }
