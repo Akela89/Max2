@@ -5,7 +5,7 @@ import ApiModal from "./ApiModal";
 
 
 const ApiForm = (props) => {
-const [openModal, setOpenModal] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <div>
@@ -17,7 +17,7 @@ const [openModal, setOpenModal] = useState(false)
                 <button onClick={() => setOpenModal(true)}>Получить погоду</button>
                 
             </div>
-            <ApiModal open={openModal} onClose={()=>setOpenModal(false)}/>
+            <ApiModal data={props.data} open={openModal} onClose={()=>setOpenModal(false)}/>
         </form>
         
         </div>
