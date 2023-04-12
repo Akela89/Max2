@@ -15,9 +15,9 @@ const [openModal, setOpenModal] = useState(false)
                 <input type="text" name="city" placeholder="Город"/>
 
                 <button onClick={() => setOpenModal(true)}>Получить погоду</button>
-                <ApiModal open={openModal} onClose={()=>setOpenModal(false)}/>
+                
             </div>
-            
+            <ApiModal open={openModal} onClose={()=>setOpenModal(false)}/>
         </form>
         
         </div>
