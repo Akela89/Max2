@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from './Forms.module.css';
 import ApiModal from "./ApiModal";
+import Spinner from "./Spinner";
 
 
 
@@ -18,6 +19,7 @@ const ApiForm = (props) => {
                 
             </div>
             <ApiModal data={props.data} open={openModal} onClose={()=>setOpenModal(false)}/>
+            <Spinner/>
         </form>
         
         </div>

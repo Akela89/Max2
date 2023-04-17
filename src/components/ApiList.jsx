@@ -20,14 +20,13 @@ const ApiList = () => {
         error: undefined,
     })
 
-    
 
     let gettingWeather = async (e) =>{
         e.preventDefault();
         let city = e.target.elements.city.value;
         
         if(city !== ''){
-            await wait(2000)
+            await wait(3000)
             const apiUrl = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
             const data = await apiUrl.json();
 
@@ -58,10 +57,11 @@ const ApiList = () => {
                 sunset: undefined,
                 error: 'Введите название города',
             })
+            
         }
     }
     return (
-        <div className={classes.formsWrapper}>
+        <div className={classes.formsWrapper}>       
             <ApiForm data={state} weatherMethod={gettingWeather}/>
             <ApiWeatherInfo
                 type="small"
@@ -71,7 +71,7 @@ const ApiList = () => {
                 sunrise={state.sunrise}
                 sunset={state.sunset}
                 error={state.error}
-            />
+            />   
         </div>
     )
 }
