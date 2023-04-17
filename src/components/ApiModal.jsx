@@ -3,6 +3,7 @@ import classes from './modalWindow.module.css'
 import ApiWeatherInfo from "./ApiWeatherInfo";
 import nft from '../assets/nft.jpg'
 
+
 const ApiModal = ({open, onClose, data}) => {
     if (!open) return null
     return (

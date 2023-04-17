@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import classes from './Forms.module.css';
 import ApiModal from "./ApiModal";
-import Spinner from "./Spinner";
-
-
 
 const ApiForm = (props) => {
     const [openModal, setOpenModal] = useState(false)
@@ -16,10 +13,9 @@ const ApiForm = (props) => {
                 <input type="text" name="city" placeholder="Город"/>
 
                 <button onClick={() => setOpenModal(true)}>Получить погоду</button>
-                
+
             </div>
             <ApiModal data={props.data} open={openModal} onClose={()=>setOpenModal(false)}/>
-            <Spinner/>
         </form>
         
         </div>
