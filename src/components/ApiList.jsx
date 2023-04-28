@@ -7,9 +7,7 @@ import Loader from './Loader';
 
 const apiKey = '986b337467ac73faba2c5e2464a7fa47';
 
-const wait =  time => new Promise(resolve => {
-    setTimeout(resolve, time)
-})
+
 
 
 const ApiList = () => {
@@ -34,7 +32,7 @@ const ApiList = () => {
         let city = e.target.elements.city.value;
         
         if(city !== ''){
-            await wait(3000)
+            
             const apiUrl = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
             const data = await apiUrl.json();
 
