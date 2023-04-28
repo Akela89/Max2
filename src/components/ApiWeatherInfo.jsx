@@ -1,7 +1,6 @@
 import React from "react";
 import classes from './Forms.module.css';
 
-
 const ApiWeatherInfo = ({type = 'small', ...props}) => {
     return (
         <div className={classes.formsWrapper}>
@@ -14,8 +13,7 @@ const ApiWeatherInfo = ({type = 'small', ...props}) => {
                             <p className={classes.formText}>Температура:{props.temp}</p>
                             <p className={classes.formText}>Восход солнца:{props.sunrise}</p>
                             <p className={classes.formText}>Заход солнца:{props.sunset}</p> 
-                        </>
-                    
+                        </>                  
                     }
                    
                 </div>

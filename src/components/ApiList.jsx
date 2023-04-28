@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from './Forms.module.css';
 import ApiWeatherInfo from "./ApiWeatherInfo";
 import ApiForm from "./ApiForm";
+import Loader from './Loader';
+
 
 const apiKey = '986b337467ac73faba2c5e2464a7fa47';
 
 const wait =  time => new Promise(resolve => {
     setTimeout(resolve, time)
 })
+
 
 const ApiList = () => {
     
@@ -20,6 +23,11 @@ const ApiList = () => {
         error: undefined,
     })
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => setIsLoading(false), 3000); 
+    }, []);
 
     let gettingWeather = async (e) =>{
         e.preventDefault();
@@ -63,6 +71,7 @@ const ApiList = () => {
     return (
         <div className={classes.formsWrapper}>       
             <ApiForm data={state} weatherMethod={gettingWeather}/>
+            <div>{isLoading ? <Loader /> : <div>Данные загружены, можете вводить название города!</div>}</div> 
             <ApiWeatherInfo
                 type="small"
                 temp={state.temp}
