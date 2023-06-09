@@ -4,11 +4,7 @@ import ApiWeatherInfo from "./ApiWeatherInfo";
 import ApiForm from "./ApiForm";
 import Loader from './Loader';
 
-
 const apiKey = '986b337467ac73faba2c5e2464a7fa47';
-
-
-
 
 const ApiList = () => {
     
@@ -21,17 +17,15 @@ const ApiList = () => {
         error: undefined,
     })
 
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-      setTimeout(() => setIsLoading(false), 3000); 
-    }, []);
+    const [isFetching, setIsFetching] = useState(false)
 
     let gettingWeather = async (e) =>{
         e.preventDefault();
         let city = e.target.elements.city.value;
         
         if(city !== ''){
+
+            setIsFetching(true);
             
             const apiUrl = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
             const data = await apiUrl.json();
@@ -54,6 +48,7 @@ const ApiList = () => {
                 sunset: sunset_date,
                 error: undefined,
             });
+            setIsFetching(false);
         } else{
             setState({
                 temp: undefined,
@@ -61,26 +56,27 @@ const ApiList = () => {
                 country: undefined,
                 sunrise: undefined,
                 sunset: undefined,
-                error: 'Введите название города',
+                error: <p className={classes.errorBlock}>Введите название города</p>,
             })
-            
         }
     }
-    return (
-        <div className={classes.formsWrapper}>       
-            <ApiForm data={state} weatherMethod={gettingWeather}/>
-            <div>{isLoading ? <Loader /> : <div>Данные загружены, можете вводить название города!</div>}</div> 
-            <ApiWeatherInfo
-                type="small"
-                temp={state.temp}
-                city={state.city}
-                country={state.country}
-                sunrise={state.sunrise}
-                sunset={state.sunset}
-                error={state.error}
-            />   
-        </div>
-    )
+    return ( 
+        <div className={classes.formsWrapper}>        
+          <ApiForm data={state} weatherMethod={gettingWeather}/> 
+            {isFetching && <Loader />} 
+                {!isFetching&& state.city &&
+                    <ApiWeatherInfo 
+                    type="small" 
+                    temp={state.temp} 
+                    city={state.city} 
+                    country={state.country} 
+                    sunrise={state.sunrise} 
+                    sunset={state.sunset} 
+                    error={state.error} 
+                    />
+                }
+        </div> 
+      )
 }
 
 export default ApiList;
