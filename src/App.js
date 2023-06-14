@@ -8,14 +8,16 @@ import HomePage from './components/HomePage';
 import NotFoundPage from './components/NotFoundPage';
 import Forms from './components/Forms';
 import EditableList from './components/EditebleList';
+import ApiList from './components/ApiList';
+
+
 
 
 function App() {
   return (
     <div className="App">
       <Header/>
-
-
+      
       <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/AboutUs' element={<AboutUs/>}/>
@@ -23,6 +25,7 @@ function App() {
           <Route path='/Contacts' element={<Contacts/>}/>
           <Route path='/Forms' element={<Forms/>}/>
           <Route path='/EditableList' element={<EditableList/>}/>
+          <Route path='/ApiList' element={<ApiList/>}/>
           <Route path='*' element={<NotFoundPage/>}/>
       </Routes> 
     </div>

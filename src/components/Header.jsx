@@ -26,7 +26,10 @@ const Header = ( ) => {
                         <Link className={classes.textNavItem} to="/Forms">Forms</Link>
                     </li>
                     <li className={classes.navItem}>
-                        <Link className={classes.textNavItem} to="/EditableList">EditableList</Link>
+                        <Link className={classes.textNavItem} to="/EditableList">Editable</Link>
+                    </li>
+                    <li className={classes.navItem}>
+                        <Link className={classes.textNavItem} to="/ApiList">Api</Link>
                     </li>
                 </ul>
             </nav>
