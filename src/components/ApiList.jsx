@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import classes from './Forms.module.css';
 import ApiWeatherInfo from "./ApiWeatherInfo";
 import ApiForm from "./ApiForm";
