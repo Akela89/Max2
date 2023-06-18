@@ -1,20 +1,28 @@
+import React, { useContext } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react"; 
-import {useEffect} from "react"
-import classes from './Forms.module.css';
+import classes from "./Forms.module.css";
+import { StateContext } from "./StateContext";
+import { useState } from "react";
 
 
-function Forms(){
-    const {register, handleSubmit, formState: {errors}} = useForm({mode: "onBlur"});
-    const [formData, setFormData]=useState([])
-    
-    function onSubmit(data){
-        setFormData ([...formData, data]);
-    };
+  
 
-    useEffect(() => { 
-        console.log(formData); 
-    },[formData]); 
+function Forms() {
+    const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onBlur' });
+
+    const [showFormWindow, setShowFormWindow] = useState(false);
+
+    const { state, dispatch } = useContext(StateContext);
+  
+    function onSubmit(data) {
+        dispatch({ type: 'SET_FORM_DATA', payload: data });
+        setShowFormWindow(true);
+      }
+  
+    useEffect(() => {
+      console.log(state.formData);
+    }, [state.formData]);
 
 return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -151,18 +159,26 @@ return (
             <br />
             <button type="submit" onClick={handleSubmit}>Submit</button>  
             <div > 
-                {formData.map((data, index) => ( 
-                    <div key={index} className={classes.formWindow}> 
-                        <p>{data.firstName}</p> 
-                        <p>{data.lastName}</p> 
-                        <p>{data.email}</p> 
-                        <p>{data.password}</p> 
-                        <p>{data.isFriendly}</p> 
-                        <p>{data.employment}</p> 
+                {showFormWindow && (
+                <div>
+                    {state.formData.map((data, index) => (
+                    <div key={index} className={classes.formWindow}>
+                        <p>{data.firstName}</p>
+                        <p>{data.lastName}</p>
+                        <p>{data.email}</p>
+                        <p>{data.password}</p>
+                        <p>{data.isFriendly}</p>
+                        <p>{data.employment}</p>
                         <p>{data.favColor}</p>
                         <p>{data.dataProcessing}</p>
-                   </div> 
-                ))} 
+                    </div>
+                    ))}
+                    <button onClick={() => {
+                    dispatch({ type: 'SET_FORM_DATA', payload: [] });
+                    setShowFormWindow(false);
+                    }}>Скрыть список</button>
+                </div>
+                )}
             </div>
         </div>
         </div>
