@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage';
 import Forms from './components/Forms';
 import EditableList from './components/EditebleList';
 import ApiList from './components/ApiList';
-import { StateProvider } from "./components/StateContext";
+
 
 
 
@@ -23,11 +23,7 @@ function App() {
           <Route path='/AboutUs' element={<AboutUs/>}/>
           <Route path='/Info' element={<Info/>}/>
           <Route path='/Contacts' element={<Contacts/>}/>
-          <Route path='/Forms' element={
-            <StateProvider>
-              <Forms />
-            </StateProvider>  
-          }/>
+          <Route path='/Forms' element={<Forms />}/>
           <Route path='/EditableList' element={<EditableList/>}/>
           <Route path='/ApiList' element={<ApiList/>}/>
           <Route path='*' element={<NotFoundPage/>}/>
