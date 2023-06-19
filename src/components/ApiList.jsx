@@ -1,21 +1,53 @@
 import React, { useState} from "react";
+import { useReducer, createContext } from "react"; 
 import classes from './Forms.module.css';
 import ApiWeatherInfo from "./ApiWeatherInfo";
 import ApiForm from "./ApiForm";
 import Loader from './Loader';
 
+
 const apiKey = '986b337467ac73faba2c5e2464a7fa47';
+
+export const WeatherContext = createContext(); 
+
+const initialState = { 
+    temp: undefined, 
+    city: undefined, 
+    country: undefined, 
+    sunrise: undefined, 
+    sunset: undefined, 
+    error: undefined, 
+} 
+
+const reducer = (state, action) => { 
+    switch(action.type) { 
+        case 'SET_WEATHER': 
+            return { 
+                temp: action.payload.temp, 
+                city: action.payload.city, 
+                country: action.payload.country, 
+                sunrise: action.payload.sunrise, 
+                sunset: action.payload.sunset, 
+                error: undefined, 
+            }; 
+        case 'SET_ERROR': 
+            return { 
+                temp: undefined, 
+                city: undefined, 
+                country: undefined, 
+                sunrise: undefined, 
+                sunset: undefined, 
+                error: <p className={classes.errorBlock}>Введите название города</p>, 
+            }; 
+        default: 
+            return state; 
+    } 
+} 
+
 
 const ApiList = () => {
     
-    const [state, setState] = useState({
-        temp: undefined,
-        city: undefined,
-        country: undefined,
-        sunrise: undefined,
-        sunset: undefined,
-        error: undefined,
-    })
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const [isFetching, setIsFetching] = useState(false)
 
@@ -40,29 +72,27 @@ const ApiList = () => {
             date.setTime(sunrise);
             let sunrise_date = date_s.getHours() + ":" + date_s.getMinutes() + ":" + date_s.getSeconds()
             
-            setState({
-                temp: data.main.temp,
-                city: data.name,
-                country: data.sys.country,
-                sunrise: sunrise_date,
-                sunset: sunset_date,
-                error: undefined,
+            dispatch({ 
+                type: 'SET_WEATHER',
+                payload: { 
+                    temp: data.main.temp, 
+                    city: data.name, 
+                    country: data.sys.country, 
+                    sunrise: sunrise_date, 
+                    sunset: sunset_date, 
+                }
+            }); 
+            setIsFetching(false); 
+            } else { 
+            dispatch({ 
+                type: 'SET_ERROR' 
             });
-            setIsFetching(false);
-        } else{
-            setState({
-                temp: undefined,
-                city: undefined,
-                country: undefined,
-                sunrise: undefined,
-                sunset: undefined,
-                error: <p className={classes.errorBlock}>Введите название города</p>,
-            })
-        }
-    }
+        } 
+    } 
     return ( 
+        <WeatherContext.Provider value={state}>
         <div className={classes.formsWrapper}>        
-          <ApiForm data={state} weatherMethod={gettingWeather}/> 
+          <ApiForm weatherMethod={gettingWeather}/> 
             {isFetching && <Loader />} 
                 {!isFetching&& state.city &&
                     <ApiWeatherInfo 
@@ -76,6 +106,7 @@ const ApiList = () => {
                     />
                 }
         </div> 
+        </WeatherContext.Provider>
       )
 }
 
