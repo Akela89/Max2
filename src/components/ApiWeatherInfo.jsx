@@ -1,7 +1,7 @@
-import React from "react";
-import classes from './Forms.module.css';
-import { WeatherContext } from "./ApiList";
-import { useContext } from "react";
+import React from 'react';
+import classes from '../modules/Forms.module.css';
+import { WeatherContext } from './ApiList';
+import { useContext } from 'react';
 
 const ApiWeatherInfo = () => {
   const { temp, city, country, sunrise, sunset, error } = useContext(WeatherContext);
