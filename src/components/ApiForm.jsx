@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import classes from '../modules/Forms.module.css';
 import ApiModal from './ApiModal';
 import { WeatherContext } from './ApiList';
@@ -6,14 +6,21 @@ import { WeatherContext } from './ApiList';
 const ApiForm = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const { dispatch } = useContext(WeatherContext);
-  const { sort } = useContext(WeatherContext);
+  const state = useContext(WeatherContext);
 
+  const [selectedSort, setSelectedSort] = useState('default');
   const handleSortChange = (e) => {
+    setSelectedSort(e.target.value);
     dispatch({
       type: 'SET_SORT',
       payload: e.target.value,
     });
   };
+
+  useEffect(() => {
+    setSelectedSort(state.sort);
+  }, [state.sort]);
+
   return (
     <div>
       <form onSubmit={props.weatherMethod}>
@@ -22,8 +29,9 @@ const ApiForm = (props) => {
           <input type="text" name="city" placeholder="Город" />
 
           <button onClick={() => setOpenModal(true)}>Получить погоду</button>
+
           <div className={classes.formGroup}>
-            <select name="sort" value={sort} onChange={handleSortChange}>
+            <select name="sort" value={selectedSort} onChange={handleSortChange}>
               <option value="default">По умолчанию</option>
               <option value="temp">По температуре</option>
               <option value="city">По городу</option>
