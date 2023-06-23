@@ -1,4 +1,5 @@
-import React, { useState, createContext, useReducer } from 'react';
+import React, { useState } from 'react';
+import { useReducer, createContext } from 'react';
 import classes from '../modules/Forms.module.css';
 import ApiWeatherInfo from './ApiWeatherInfo';
 import ApiForm from './ApiForm';
@@ -14,7 +15,6 @@ const initialState = {
   country: undefined,
   sunrise: undefined,
   sunset: undefined,
-  sort: 'default',
   error: undefined,
 };
 
@@ -27,7 +27,6 @@ const reducer = (state, action) => {
         country: action.payload.country,
         sunrise: action.payload.sunrise,
         sunset: action.payload.sunset,
-        sort: action.payload,
         error: undefined,
       };
     case 'SET_ERROR':
@@ -37,7 +36,6 @@ const reducer = (state, action) => {
         country: undefined,
         sunrise: undefined,
         sunset: undefined,
-        sort: undefined,
         error: <p className={classes.errorBlock}>Введите название города</p>,
       };
     default:
@@ -58,7 +56,7 @@ const ApiList = () => {
       setIsFetching(true);
 
       const apiUrl = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&sort=${state.sort}`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`,
       );
       const data = await apiUrl.json();
 
