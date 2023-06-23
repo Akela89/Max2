@@ -23,37 +23,11 @@ const ApiForm = (props) => {
 
           <button onClick={() => setOpenModal(true)}>Получить погоду</button>
           <div className={classes.formGroup}>
-            <span>Сортировка:</span>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                value="default"
-                checked={sort === 'default'}
-                onChange={handleSortChange}
-              />
-              По умолчанию
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                value="temp"
-                checked={sort === 'temp'}
-                onChange={handleSortChange}
-              />
-              По температуре
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                value="city"
-                checked={sort === 'city'}
-                onChange={handleSortChange}
-              />
-              По городу
-            </label>
+            <select name="sort" value={sort} onChange={handleSortChange}>
+              <option value="default">По умолчанию</option>
+              <option value="temp">По температуре</option>
+              <option value="city">По городу</option>
+            </select>
           </div>
         </div>
         <ApiModal data={props.data} open={openModal} onClose={() => setOpenModal(false)} />
