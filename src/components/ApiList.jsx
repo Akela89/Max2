@@ -17,9 +17,6 @@ const initialState = {
   sunset: undefined,
   error: undefined,
   sortOption: 'default',
-  resultsPerPage: 10,
-  currentPage: 1,
-  totalPages: 1,
 };
 
 const reducer = (state, action) => {
@@ -47,21 +44,6 @@ const reducer = (state, action) => {
         ...state,
         sortOption: action.payload,
       };
-    case 'SET_RESULTS_PER_PAGE':
-      return {
-        ...state,
-        resultsPerPage: action.payload,
-      };
-    case 'SET_CURRENT_PAGE':
-      return {
-        ...state,
-        currentPage: action.payload,
-      };
-    case 'SET_TOTAL_PAGES':
-      return {
-        ...state,
-        totalPages: action.payload,
-      };
     default:
       return state;
   }
@@ -76,27 +58,16 @@ const ApiList = () => {
     dispatch({ type: 'SET_SORT_OPTION', payload: e.target.value });
   };
 
-  const handleResultsPerPageChange = (e) => {
-    dispatch({ type: 'SET_RESULTS_PER_PAGE', payload: parseInt(e.target.value) });
-  };
-
-  const handleCurrentPageChange = (e) => {
-    dispatch({ type: 'SET_CURRENT_PAGE', payload: parseInt(e.target.value) });
-  };
   const gettingWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const sortOption = state.sortOption;
-    const resultsPerPage = state.resultsPerPage;
-    const currentPage = state.currentPage;
 
     if (city !== '') {
       setIsFetching(true);
 
-      const startIndex = (currentPage - 1) * resultsPerPage;
-
       const apiUrl = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&sort=${sortOption}&start=${startIndex}&cnt=${resultsPerPage}&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&sort=${sortOption}&appid=${apiKey}`,
       );
       const data = await apiUrl.json();
 
@@ -137,19 +108,6 @@ const ApiList = () => {
             <option value="temperature">По температуре</option>
             <option value="city">По городу</option>
           </select>
-
-          <select value={state.resultsPerPage} onChange={handleResultsPerPageChange}>
-            <option value={10}>10 результатов</option>
-            <option value={20}>20 результатов</option>
-            <option value={50}>50 результатов</option>
-          </select>
-
-          <input
-            className={classes.inputWrapper}
-            type="number"
-            value={state.currentPage}
-            onChange={handleCurrentPageChange}
-          />
         </div>
         {isFetching && <Loader />}
         {!isFetching && state.city && (
