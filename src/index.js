@@ -8,13 +8,13 @@ import { StateProvider } from './components/StateContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <StateProvider>
   <React.StrictMode>
     <BrowserRouter>
-      <App />
-    </BrowserRouter>    
-  </React.StrictMode>
-  </StateProvider>
+      <StateProvider>
+        <App />
+      </StateProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
